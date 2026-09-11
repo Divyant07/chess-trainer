@@ -1,0 +1,35 @@
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
+
+header h1 {
+  margin-bottom: 0.25rem;
+}
+
+.api-status {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.api-status.ok {
+  color: #2e7d32;
+}
+
+.api-status.warn {
+  color: #c62828;
+}
+
+.board-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.hint {
+  color: #666;
+  font-size: 0.85rem;
+}
