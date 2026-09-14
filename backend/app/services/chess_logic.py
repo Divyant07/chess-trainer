@@ -65,3 +65,12 @@ def is_valid_fen(fen: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def uci_to_san(fen: str, uci: str) -> str:
+    """Converts a UCI move string to SAN notation for a given position --
+    used when we need to show a human-readable move (e.g. the correct
+    answer for a tactic) but only have the UCI form stored."""
+    board = chess.Board(fen)
+    move = chess.Move.from_uci(uci)
+    return board.san(move)

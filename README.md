@@ -82,11 +82,37 @@ chess-trainer/
 
 ## Roadmap
 
-- **Phase 1** — Repertoire builder: click-to-move UI that saves lines via
-  the already-built `/repertoires` API
-- **Phase 2** — Spaced repetition trainer (SM-2) for quizzing your saved lines
-- **Phase 3** — Tactics trainer, tagged by motif (fork, pin, counter-attack)
-- **Phase 4** — Import games from chess.com/lichess, detect where you
+- **Phase 1** -- Repertoire builder: click-to-move UI that saves lines via
+  the already-built `/repertoires` API (done)
+- **Phase 2** -- Spaced repetition trainer (SM-2) for quizzing your saved
+  lines (done), plus:
+  - **Play vs Engine** -- full games against Stockfish at adjustable
+    strength (Elo presets), with undo
+  - **Tactics** -- puzzle trainer using the same SM-2 scheduling as the
+    repertoire trainer
+- **Phase 3** -- Import games from chess.com/lichess, detect where you
   deviated from your repertoire, flag it against Stockfish eval
-- **Phase 5** — Dashboard: win rate by opening, common deviation points,
+- **Phase 4** -- Dashboard: win rate by opening, common deviation points,
   weakest tactical patterns
+
+## Getting more tactics puzzles
+
+Two starter puzzles are included so the Tactics tab isn't empty on day
+one -- both hand-verified (a king+queen corner mate and a knight fork).
+Seed them by running, from `backend/` with your venv active:
+
+```bash
+python -m scripts.seed_tactics
+```
+
+For real volume, Lichess publishes their entire puzzle database for free
+under a CC0 (public domain) license:
+https://database.lichess.org/#puzzles
+
+It's a large CSV (`.csv.zst` compressed) with millions of rated,
+human-verified puzzles tagged by theme (fork, pin, back rank, etc).
+Decompress it (7-Zip on Windows handles `.zst`, or `pip install
+zstandard` and decompress in a couple lines of Python), then you can
+write a small import script that reads the CSV and calls `POST /tactics`
+for each row you want -- filter by rating range or theme so you don't
+import all several million at once.

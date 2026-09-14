@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.models.repertoire import Node, Repertoire
+from app.models.training import TrainingStats
 from app.schemas.repertoire import NodeCreate, NodeOut, RepertoireCreate, RepertoireOut
 from app.services.chess_logic import STARTING_FEN, IllegalMoveError, apply_move
 
@@ -85,6 +86,14 @@ def add_node(repertoire_id: int, payload: NodeCreate, db: Session = Depends(get_
     db.add(node)
     db.commit()
     db.refresh(node)
+
+    # Every learnable node (i.e. every node except root) gets a training
+    # stats row immediately, with next_review_at defaulting to "now" --
+    # this puts it straight into the due queue for the trainer.
+    stats = TrainingStats(node_id=node.id)
+    db.add(stats)
+    db.commit()
+
     return node
 
 

@@ -1,9 +1,108 @@
-.app {
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #e0e0e0;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar-section {
+  margin-bottom: 2rem;
+}
+
+.sidebar-section label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sidebar-section select,
+.sidebar-section input[type='text'] {
+  width: 100%;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #1565c0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.create-form-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.create-form-actions button {
+  flex: 1;
+  padding: 0.35rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.empty-hint {
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.4;
+}
+
+.lines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.line-button {
+  width: 100%;
+  text-align: left;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+}
+
+.line-button:hover {
+  background: #ebebeb;
+}
+
+/* --- Main panel --- */
+.main-panel {
+  flex: 1;
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem 1rem;
   text-align: center;
-  font-family: system-ui, sans-serif;
 }
 
 header h1 {
@@ -12,7 +111,7 @@ header h1 {
 
 .api-status {
   font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .api-status.ok {
@@ -26,10 +125,147 @@ header h1 {
 .board-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.current-line {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  min-height: 1.2rem;
+}
+
+.board-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.board-actions button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.board-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-status {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.save-status.ok {
+  color: #2e7d32;
+}
+
+.save-status.warn {
+  color: #c62828;
 }
 
 .hint {
   color: #666;
   font-size: 0.85rem;
+}
+
+/* --- Mode tabs --- */
+.mode-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.mode-tabs button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mode-tabs button.active {
+  background: #1565c0;
+  color: #fff;
+  border-color: #1565c0;
+}
+
+/* --- Training view --- */
+.due-count {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.training-feedback {
+  min-height: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.feedback {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.feedback.ok {
+  color: #2e7d32;
+}
+
+.feedback.warn {
+  color: #c62828;
+}
+
+.training-empty {
+  padding: 2rem 0;
+}
+
+.training-empty button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* --- Play vs engine --- */
+.play-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.play-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+
+.play-controls select {
+  padding: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* --- Tactics --- */
+.motif-tags {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
 }
